@@ -3,79 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Necessidades de Compra de Material - 2025</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <title>Formulário - Necessidades de Compra</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="container">
-        <h1>Registro de Necessidades de Compra - 2025</h1>
+    <div class="navbar">
+        <a href="login.html">Login</a>
+        <a href="index.html">Formulário</a>
+        <a href="relatorios.html">Relatórios</a>
+    </div>
 
-        <form id="material-form">
+    <div class="container">
+        <h1>Registro de Necessidades de Compra</h1>
+        <form id="purchase-form">
             <div class="form-group">
-                <label for="nome">Nome</label>
-                <input type="text" id="nome" name="nome" required>
-            </div>
-            <div class="form-group">
-                <label for="setor">Setor</label>
-                <input type="text" id="setor" name="setor" required>
-            </div>
-            <div class="form-group">
-                <label for="tipo">Tipo de Material</label>
-                <input type="text" id="tipo" name="tipo" required>
-            </div>
-            <div class="form-group">
-                <label for="descricao">Descrição do Material</label>
-                <textarea id="descricao" name="descricao" required></textarea>
-            </div>
-            <div class="form-group">
-                <label for="quantidade">Quantidade</label>
-                <input type="number" id="quantidade" name="quantidade" required>
+                <label for="material">Material</label>
+                <input type="text" id="material" name="material" required>
             </div>
             <div class="form-group">
                 <label for="prioridade">Prioridade</label>
                 <select id="prioridade" name="prioridade" required>
-                    <option value="Alta">Alta</option>
-                    <option value="Média">Média</option>
-                    <option value="Baixa">Baixa</option>
+                    <option value="alta">Alta</option>
+                    <option value="media">Média</option>
+                    <option value="baixa">Baixa</option>
                 </select>
             </div>
-            <div class="form-group">
-                <label for="justificativa">Justificativa</label>
-                <textarea id="justificativa" name="justificativa" required></textarea>
-            </div>
-            <button type="submit">Enviar Solicitação</button>
+            <button type="submit">Enviar</button>
         </form>
-
-        <!-- Link para a página de relatórios -->
-        <div class="relatorios-link">
-            <a href="relatorios.html">Ver Relatórios de Solicitações</a>
-        </div>
+        <button id="logout">Sair</button>
     </div>
 
     <script>
-        if (!sessionStorage.getItem("isLoggedIn")) {
-            window.location.href = "login.html";
-        }
-
-        document.getElementById("material-form").addEventListener("submit", function(event) {
-            event.preventDefault();
-
-            const dadosFormulario = {
-                nome: document.getElementById("nome").value,
-                setor: document.getElementById("setor").value,
-                tipo: document.getElementById("tipo").value,
-                descricao: document.getElementById("descricao").value,
-                quantidade: document.getElementById("quantidade").value,
-                prioridade: document.getElementById("prioridade").value,
-                justificativa: document.getElementById("justificativa").value
-            };
-
-            let registros = JSON.parse(localStorage.getItem("solicitacoes")) || [];
-            registros.push(dadosFormulario);
-            localStorage.setItem("solicitacoes", JSON.stringify(registros));
-
-            alert("Solicitação enviada com sucesso!");
+        document.getElementById("logout").addEventListener("click", function() {
+            sessionStorage.clear(); // Limpa o armazenamento da sessão
+            window.location.href = "login.html"; // Redireciona para a página de login
         });
     </script>
 </body>
