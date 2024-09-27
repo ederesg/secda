@@ -1,14 +1,21 @@
 /* Estilo geral da página */
 body {
-    background-color: #f8f9fa; /* Cor de fundo clara */
+    background-image: url('gripen.jpg'); /* Caminho para a imagem de fundo */
+    background-size: cover; /* Faz a imagem cobrir todo o fundo */
+    background-position: center; /* Centraliza a imagem */
     font-family: Arial, sans-serif; /* Fonte padrão */
     color: #343a40; /* Cor do texto */
+    height: 100vh; /* Altura total da visualização */
+    margin: 0; /* Remove margens */
 }
 
 /* Estilo para o container da página */
 .container {
     max-width: 600px; /* Largura máxima do container */
     margin: auto; /* Centraliza o container */
+    background-color: rgba(255, 255, 255, 0.8); /* Fundo branco com transparência */
+    border-radius: 0.5rem; /* Arredondamento dos cantos */
+    padding: 20px; /* Espaçamento interno */
 }
 
 /* Estilo do cartão (card) */
@@ -61,14 +68,4 @@ button:hover {
 /* Estilo para mensagens de erro */
 #mensagem {
     margin-top: 10px; /* Espaçamento acima da mensagem */
-}
-
-body {
-    background-image: url('ederesg/imagens/gripen.jpg'); /* Caminho para a imagem de fundo */
-    background-size: cover; /* Faz a imagem cobrir todo o fundo */
-    background-position: center; /* Centraliza a imagem */
-    font-family: Arial, sans-serif; /* Fonte padrão */
-    color: #343a40; /* Cor do texto */
-    height: 100vh; /* Altura total da visualização */
-    margin: 0; /* Remove margens */
 }
