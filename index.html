@@ -14,7 +14,7 @@
                 <h2>Registro de Necessidades de Compra</h2>
             </div>
             <div class="card-body">
-                <form id="purchase-form" action="URL_DO_SEU_SCRIPT" method="POST">
+                <form id="purchase-form">
                     <div class="form-group">
                         <label for="prioridade">Prioridade</label>
                         <select class="form-control" id="prioridade" name="prioridade" required>
@@ -69,8 +69,42 @@
                     </div>
                     <button type="submit" class="btn btn-success btn-block">Enviar</button>
                 </form>
+                <button id="logout" class="btn btn-danger btn-block mt-3">Sair</button>
             </div>
         </div>
     </div>
+
+    <script>
+        // URL do Google Apps Script publicado como Web App
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbzMzWOGSbfinMz_-_863yJfrvmiLyXuclXviGzQXl8yYnUK1C-WRsapcKqUFYEFddD6/exec';
+
+        function submitForm() {
+            const formData = new FormData(document.getElementById("purchase-form"));
+            
+            fetch(scriptURL, {
+                method: 'POST',
+                body: formData,
+            })
+            .then(response => response.text())
+            .then(result => {
+                alert("Formulário enviado com sucesso!");
+                console.log(result);
+            })
+            .catch(error => {
+                console.error("Erro ao enviar o formulário:", error);
+                alert("Houve um erro ao enviar o formulário.");
+            });
+        }
+
+        document.getElementById("purchase-form").addEventListener("submit", function(event) {
+            event.preventDefault(); // Previne o comportamento padrão
+            submitForm(); // Chama a função de envio
+        });
+
+        document.getElementById("logout").addEventListener("click", function() {
+            sessionStorage.clear();
+            window.location.href = "login.html";
+        });
+    </script>
 </body>
 </html>
