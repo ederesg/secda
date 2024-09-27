@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Necessidades de Compra de Material - 2025</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <h1><i class="fas fa-clipboard-list"></i> Registro de Necessidades de Compra - 2025</h1>
+
+        <form id="material-form">
+            <div class="form-group">
+                <label for="nome">Nome do Militar</label>
+                <input type="text" id="nome" name="nome" required>
+            </div>
+
+            <div class="form-group">
+                <label for="setor">Setor/Divisão</label>
+                <input type="text" id="setor" name="setor" required>
+            </div>
+
+            <div class="form-group">
+                <label for="tipo">Tipo de Material</label>
+                <select id="tipo" name="tipo" required>
+                    <option value="escritório">Escritório</option>
+                    <option value="tecnologia">Tecnologia</option>
+                    <option value="manutenção">Manutenção</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="descricao">Descrição do Material</label>
+                <textarea id="descricao" name="descricao" required></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="quantidade">Quantidade</label>
+                <input type="number" id="quantidade" name="quantidade" required>
+            </div>
+
+            <div class="form-group">
+                <label for="prioridade">Prioridade</label>
+                <select id="prioridade" name="prioridade" required>
+                    <option value="baixa">Baixa</option>
+                    <option value="media">Média</option>
+                    <option value="alta">Alta</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="justificativa">Justificativa</label>
+                <textarea id="justificativa" name="justificativa" required></textarea>
+            </div>
+
+            <button type="submit"><i class="fas fa-paper-plane"></i> Enviar Solic
