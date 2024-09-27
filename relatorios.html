@@ -4,48 +4,43 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Relatórios - Necessidades de Compra</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="navbar">
-        <a href="login.html">Login</a>
-        <a href="index.html">Formulário</a>
-        <a href="relatorios.html">Relatórios</a>
-    </div>
-
-    <div class="container">
-        <h1>Relatórios de Solicitações</h1>
-        <div id="relatorios">
-            <!-- Aqui você pode gerar as solicitações -->
+    <div class="container mt-5">
+        <div class="card">
+            <div class="card-header text-center">
+                <h2>Relatórios de Solicitações</h2>
+            </div>
+            <div class="card-body">
+                <div id="relatorios" class="mb-4">
+                    <!-- Aqui você pode gerar as solicitações -->
+                </div>
+                <button id="logout" class="btn btn-danger btn-block">Sair</button>
+            </div>
         </div>
-        <div class="relatorios-link">
-            <a href="index.html">Voltar ao Formulário</a>
-        </div>
-        <button id="logout">Sair</button>
     </div>
 
     <script>
-        // Simulando a lista de solicitações
         const relatorios = [
             { id: 1, descricao: "Material A", prioridade: "Alta" },
             { id: 2, descricao: "Material B", prioridade: "Média" }
         ];
 
-        // Função para exibir as solicitações
         function mostrarRelatorios() {
             const relatoriosDiv = document.getElementById("relatorios");
             relatorios.forEach(solicitacao => {
                 const div = document.createElement("div");
-                div.classList.add("solicitacao");
+                div.classList.add("solicitacao", "alert", "alert-info");
                 div.innerHTML = `<strong>${solicitacao.descricao}</strong> - Prioridade: ${solicitacao.prioridade}`;
                 relatoriosDiv.appendChild(div);
             });
         }
 
-        // Função para fazer logout
         document.getElementById("logout").addEventListener("click", function() {
-            sessionStorage.clear(); // Limpa o armazenamento da sessão
-            window.location.href = "login.html"; // Redireciona para a página de login
+            sessionStorage.clear();
+            window.location.href = "login.html";
         });
 
         mostrarRelatorios();
