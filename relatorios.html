@@ -3,58 +3,39 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Relatórios de Solicitações</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <title>Relatórios - Necessidades de Compra</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div class="container">
         <h1>Relatórios de Solicitações</h1>
-        <div id="solicitacoes-list"></div>
+        <div id="relatorios">
+            <!-- Aqui você pode gerar as solicitações -->
+        </div>
+        <div class="relatorios-link">
+            <a href="index.html">Voltar ao Formulário</a>
+        </div>
     </div>
 
     <script>
-        if (!sessionStorage.getItem("isLoggedIn")) {
-            window.location.href = "login.html";
-        }
+        // Simulando a lista de solicitações
+        const relatorios = [
+            { id: 1, descricao: "Material A", prioridade: "Alta" },
+            { id: 2, descricao: "Material B", prioridade: "Média" }
+        ];
 
-        const userType = sessionStorage.getItem("userType");
-
-        function carregarSolicitacoes() {
-            let solicitacoes = JSON.parse(localStorage.getItem("solicitacoes")) || [];
-            const lista = document.getElementById("solicitacoes-list");
-
-            lista.innerHTML = "";
-            solicitacoes.forEach((solicitacao, index) => {
-                lista.innerHTML += `
-                    <div class="solicitacao">
-                        <p><strong>Nome:</strong> ${solicitacao.nome}</p>
-                        <p><strong>Setor:</strong> ${solicitacao.setor}</p>
-                        <p><strong>Tipo de Material:</strong> ${solicitacao.tipo}</p>
-                        <p><strong>Quantidade:</strong> ${solicitacao.quantidade}</p>
-                        <p><strong>Descrição:</strong> ${solicitacao.descricao}</p>
-                        <p><strong>Prioridade:</strong> ${userType === "admin" ? 
-                            `<select id="prioridade-${index}" onchange="atualizarPrioridade(${index})">
-                                <option value="Alta" ${solicitacao.prioridade === "Alta" ? "selected" : ""}>Alta</option>
-                                <option value="Média" ${solicitacao.prioridade === "Média" ? "selected" : ""}>Média</option>
-                                <option value="Baixa" ${solicitacao.prioridade === "Baixa" ? "selected" : ""}>Baixa</option>
-                            </select>` : solicitacao.prioridade}
-                        </p>
-                        <p><strong>Justificativa:</strong> ${solicitacao.justificativa}</p>
-                    </div>
-                `;
+        // Função para exibir as solicitações
+        function mostrarRelatorios() {
+            const relatoriosDiv = document.getElementById("relatorios");
+            relatorios.forEach(solicitacao => {
+                const div = document.createElement("div");
+                div.classList.add("solicitacao");
+                div.innerHTML = `<strong>${solicitacao.descricao}</strong> - Prioridade: ${solicitacao.prioridade}`;
+                relatoriosDiv.appendChild(div);
             });
         }
 
-        function atualizarPrioridade(index) {
-            let solicitacoes = JSON.parse(localStorage.getItem("solicitacoes")) || [];
-            const novaPrioridade = document.getElementById(`prioridade-${index}`).value;
-            solicitacoes[index].prioridade = novaPrioridade;
-            localStorage.setItem("solicitacoes", JSON.stringify(solicitacoes));
-            alert("Prioridade atualizada com sucesso!");
-        }
-
-        carregarSolicitacoes();
+        mostrarRelatorios();
     </script>
 </body>
 </html>
