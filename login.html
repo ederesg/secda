@@ -30,15 +30,20 @@
             const username = document.getElementById("username").value;
             const password = document.getElementById("password").value;
 
-            // Simulando uma verificação de usuário e senha
-            const validUsername = "militar";
-            const validPassword = "senha123";
+            // Credenciais para usuários comuns e administrador
+            const validUser = { username: "militar", password: "senha123" };
+            const adminUser = { username: "admin", password: "admin123" };
 
-            if (username === validUsername && password === validPassword) {
-                // Salva o estado de login
+            if (username === validUser.username && password === validUser.password) {
+                // Salva o estado de login do usuário comum
                 sessionStorage.setItem("isLoggedIn", true);
-                // Redireciona o usuário para a página do formulário
-                window.location.href = "index.html";
+                sessionStorage.setItem("userType", "user"); // Define como usuário comum
+                window.location.href = "index.html"; // Redireciona para o formulário
+            } else if (username === adminUser.username && password === adminUser.password) {
+                // Salva o estado de login do administrador
+                sessionStorage.setItem("isLoggedIn", true);
+                sessionStorage.setItem("userType", "admin"); // Define como administrador
+                window.location.href = "admin.html"; // Redireciona para a página do admin
             } else {
                 document.getElementById("mensagem").textContent = "Usuário ou senha inválidos.";
                 document.getElementById("mensagem").style.color = "red";
