@@ -19,6 +19,7 @@
         }
 
         const userType = sessionStorage.getItem("userType");
+
         function carregarSolicitacoes() {
             let solicitacoes = JSON.parse(localStorage.getItem("solicitacoes")) || [];
             const lista = document.getElementById("solicitacoes-list");
