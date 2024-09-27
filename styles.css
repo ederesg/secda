@@ -62,3 +62,13 @@ button:hover {
 #mensagem {
     margin-top: 10px; /* Espaçamento acima da mensagem */
 }
+
+body {
+    background-image: url('ederesg/imagens/gripen.jpg'); /* Caminho para a imagem de fundo */
+    background-size: cover; /* Faz a imagem cobrir todo o fundo */
+    background-position: center; /* Centraliza a imagem */
+    font-family: Arial, sans-serif; /* Fonte padrão */
+    color: #343a40; /* Cor do texto */
+    height: 100vh; /* Altura total da visualização */
+    margin: 0; /* Remove margens */
+}
