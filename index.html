@@ -6,89 +6,6 @@
     <title>Formulário - Necessidades de Compra</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="styles.css">
-    <script src="https://apis.google.com/js/api.js"></script>
-    <script>
-        // Configurações da Google Sheets API
-        const SHEET_ID = '1ai9Dmp4j_nDhYzdXT7OArLc6vOWCS6332nT77MIifto';
-        const SHEET_NAME = 'PTA';
-        const API_KEY = '114GMEx9WUkl_GC0sGZwCFSaTkJfmHgm2Am0wtD618Fz65Y_ei2nWthNI'; // Sua chave da API
-
-        // Função para enviar os dados do formulário
-        function submitForm(data) {
-            const params = {
-                spreadsheetId: SHEET_ID,
-                range: `${SHEET_NAME}!A2:J`, // Ajuste o range conforme necessário
-                valueInputOption: 'RAW',
-                insertDataOption: 'INSERT_ROWS',
-                key: API_KEY
-            };
-
-            const body = {
-                values: [data] // Os dados do formulário
-            };
-
-            const request = gapi.client.sheets.spreadsheets.values.append(params, body);
-            request.then(
-                (response) => {
-                    console.log('Dados enviados com sucesso:', response);
-                    alert('Formulário enviado com sucesso!');
-                },
-                (error) => {
-                    console.error('Erro ao enviar dados:', error);
-                    alert('Erro ao enviar formulário.');
-                }
-            );
-        }
-
-        // Inicia a API quando o documento estiver carregado
-        function initClient() {
-            gapi.client
-                .init({
-                    apiKey: API_KEY,
-                    discoveryDocs: ['https://sheets.googleapis.com/$discovery/rest?version=v4']
-                })
-                .then(() => {
-                    // API está pronta
-                });
-        }
-
-        // Carrega a biblioteca
-        function loadGapiClient() {
-            gapi.load('client', initClient);
-        }
-
-        // Chama a função ao enviar o formulário
-        document.addEventListener("DOMContentLoaded", function() {
-            document.getElementById("purchase-form").addEventListener("submit", function(event) {
-                event.preventDefault(); // Impede o envio padrão do formulário
-                loadGapiClient(); // Carrega a API
-
-                // Coleta os dados do formulário
-                const data = [
-                    document.getElementById("prioridade").value,
-                    document.getElementById("item").value,
-                    document.getElementById("descricao").value,
-                    document.getElementById("quantidade").value,
-                    document.getElementById("valor").value,
-                    document.getElementById("natureza").value,
-                    document.getElementById("secao_centralizador").value,
-                    document.getElementById("email_centralizador").value,
-                    document.getElementById("secao_cliente").value,
-                    document.getElementById("email_cliente").value,
-                    document.getElementById("justificativa").value,
-                    document.getElementById("status").value,
-                ];
-
-                // Envia os dados para a planilha
-                submitForm(data);
-            });
-
-            document.getElementById("logout").addEventListener("click", function() {
-                sessionStorage.clear();
-                window.location.href = "login.html";
-            });
-        });
-    </script>
 </head>
 <body>
     <div class="container mt-5">
@@ -97,7 +14,7 @@
                 <h2>Registro de Necessidades de Compra</h2>
             </div>
             <div class="card-body">
-                <form id="purchase-form">
+                <form id="purchase-form" action="URL_DO_SEU_SCRIPT" method="POST">
                     <div class="form-group">
                         <label for="prioridade">Prioridade</label>
                         <select class="form-control" id="prioridade" name="prioridade" required>
@@ -152,7 +69,6 @@
                     </div>
                     <button type="submit" class="btn btn-success btn-block">Enviar</button>
                 </form>
-                <button id="logout" class="btn btn-danger btn-block mt-3">Sair</button>
             </div>
         </div>
     </div>
