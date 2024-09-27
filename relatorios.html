@@ -21,6 +21,7 @@
         <div class="relatorios-link">
             <a href="index.html">Voltar ao Formulário</a>
         </div>
+        <button id="logout">Sair</button>
     </div>
 
     <script>
@@ -40,6 +41,12 @@
                 relatoriosDiv.appendChild(div);
             });
         }
+
+        // Função para fazer logout
+        document.getElementById("logout").addEventListener("click", function() {
+            sessionStorage.clear(); // Limpa o armazenamento da sessão
+            window.location.href = "login.html"; // Redireciona para a página de login
+        });
 
         mostrarRelatorios();
     </script>
