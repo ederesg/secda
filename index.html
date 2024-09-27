@@ -6,6 +6,12 @@
     <title>Formulário - Necessidades de Compra</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="styles.css">
+    <script>
+        // Verifica se o usuário está autenticado
+        if (!sessionStorage.getItem("authenticated")) {
+            window.location.href = "login.html"; // Redireciona para a tela de login
+        }
+    </script>
 </head>
 <body>
     <div class="container mt-5">
@@ -76,8 +82,8 @@
 
     <script>
         document.getElementById("logout").addEventListener("click", function() {
-            sessionStorage.clear();
-            window.location.href = "login.html";
+            sessionStorage.clear(); // Limpa os dados de sessão
+            window.location.href = "login.html"; // Redireciona para a tela de login
         });
     </script>
 </body>
