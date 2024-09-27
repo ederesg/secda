@@ -35,6 +35,8 @@
             const validPassword = "senha123";
 
             if (username === validUsername && password === validPassword) {
+                // Salva o estado de login
+                sessionStorage.setItem("isLoggedIn", true);
                 // Redireciona o usuário para a página do formulário
                 window.location.href = "index.html";
             } else {
