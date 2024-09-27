@@ -4,39 +4,40 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Formulário - Necessidades de Compra</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="navbar">
-        <a href="login.html">Login</a>
-        <a href="index.html">Formulário</a>
-        <a href="relatorios.html">Relatórios</a>
-    </div>
-
-    <div class="container">
-        <h1>Registro de Necessidades de Compra</h1>
-        <form id="purchase-form">
-            <div class="form-group">
-                <label for="material">Material</label>
-                <input type="text" id="material" name="material" required>
+    <div class="container mt-5">
+        <div class="card">
+            <div class="card-header text-center">
+                <h2>Registro de Necessidades de Compra</h2>
             </div>
-            <div class="form-group">
-                <label for="prioridade">Prioridade</label>
-                <select id="prioridade" name="prioridade" required>
-                    <option value="alta">Alta</option>
-                    <option value="media">Média</option>
-                    <option value="baixa">Baixa</option>
-                </select>
+            <div class="card-body">
+                <form id="purchase-form">
+                    <div class="form-group">
+                        <label for="material">Material</label>
+                        <input type="text" class="form-control" id="material" name="material" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="prioridade">Prioridade</label>
+                        <select class="form-control" id="prioridade" name="prioridade" required>
+                            <option value="alta">Alta</option>
+                            <option value="media">Média</option>
+                            <option value="baixa">Baixa</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-success btn-block">Enviar</button>
+                </form>
+                <button id="logout" class="btn btn-danger btn-block mt-3">Sair</button>
             </div>
-            <button type="submit">Enviar</button>
-        </form>
-        <button id="logout">Sair</button>
+        </div>
     </div>
 
     <script>
         document.getElementById("logout").addEventListener("click", function() {
-            sessionStorage.clear(); // Limpa o armazenamento da sessão
-            window.location.href = "login.html"; // Redireciona para a página de login
+            sessionStorage.clear();
+            window.location.href = "login.html";
         });
     </script>
 </body>
