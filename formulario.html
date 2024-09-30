@@ -7,13 +7,22 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <script>
         function submitForm(event) {
-            event.preventDefault();  // Impede o envio padrão do formulário
+            event.preventDefault(); // Impede o envio padrão do formulário
 
+            // Serializando os dados do formulário
             const formData = new FormData(document.getElementById("purchase-form"));
+            const data = {};
+            formData.forEach((value, key) => {
+                data[key] = value;
+            });
 
+            // Enviando os dados para o Google Apps Script em formato JSON
             fetch("https://script.google.com/macros/s/AKfycbzMzWOGSbfinMz_-_863yJfrvmiLyXuclXviGzQXl8yYnUK1C-WRsapcKqUFYEFddD6/exec", {
                 method: "POST",
-                body: formData
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data)  // Converte os dados para JSON antes de enviar
             })
             .then(response => response.json())
             .then(data => {
