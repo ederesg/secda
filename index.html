@@ -8,6 +8,14 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+
+    <script>
+        // Verifica se o usuário está logado
+        if (!sessionStorage.getItem("loggedIn")) {
+            window.location.href = "login.html"; // Redireciona para a página de login
+        }
+    </script>
+
     <div class="container mt-5">
         <div class="card">
             <div class="card-header text-center">
@@ -73,36 +81,17 @@
             </div>
         </div>
     </div>
+
     <script>
-        const scriptURL = 'https://script.google.com/macros/s/AKfycbzMzWOGSbfinMz_-_863yJfrvmiLyXuclXviGzQXl8yYnUK1C-WRsapcKqUFYEFddD6/exec'; // URL do Google Apps Script
+        // Verifica se o usuário está logado, caso contrário redireciona para o login
+        if (!sessionStorage.getItem("loggedIn")) {
+            window.location.href = "login.html";
+        }
 
-        // Função para enviar os dados do formulário
-        document.addEventListener("DOMContentLoaded", function() {
-            document.getElementById("purchase-form").addEventListener("submit", function(event) {
-                event.preventDefault(); // Impede o envio padrão do formulário
-                
-                const formData = new FormData(document.getElementById("purchase-form"));
-                
-                fetch(scriptURL, {
-                    method: 'POST',
-                    body: formData,
-                })
-                .then(response => response.text())
-                .then(result => {
-                    console.log("Resposta do servidor:", result); // Mostra a resposta do servidor
-                    alert("Formulário enviado com sucesso!");
-                    document.getElementById("purchase-form").reset(); // Limpa o formulário após envio
-                })
-                .catch(error => {
-                    console.error("Erro ao enviar o formulário:", error); // Mostra erro no console
-                    alert("Houve um erro ao enviar o formulário.");
-                });
-            });
-
-            document.getElementById("logout").addEventListener("click", function() {
-                sessionStorage.clear();
-                window.location.href = "login.html"; // Redireciona para a página de login
-            });
+        // Função para sair (logout)
+        document.getElementById("logout").addEventListener("click", function() {
+            sessionStorage.removeItem("loggedIn"); // Remove o estado de login
+            window.location.href = "login.html";   // Redireciona para a página de login
         });
     </script>
 </body>
