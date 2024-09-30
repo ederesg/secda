@@ -7,49 +7,31 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <script>
         function submitForm(event) {
-            event.preventDefault(); // Impede o envio padrão do formulário
+            event.preventDefault();  // Impede o envio padrão do formulário
 
-            // Confirma o envio do formulário
-            if (confirm("Você realmente deseja enviar o formulário?")) {
-                const formData = new FormData(document.getElementById("purchase-form"));
+            const formData = new FormData(document.getElementById("purchase-form"));
 
-                fetch("https://script.google.com/macros/s/AKfycbzMzWOGSbfinMz_-_863yJfrvmiLyXuclXviGzQXl8yYnUK1C-WRsapcKqUFYEFddD6/exec", {
-                    method: "POST",
-                    body: formData
-                })
-                .then(response => {
-                    // Verifica se a resposta é do tipo JSON
-                    if (!response.ok) {
-                        throw new Error('Erro na resposta do servidor');
-                    }
-                    return response.json();
-                })
-                .then(data => {
-                    if (data.status === "success") {
-                        alert('Formulário enviado com sucesso!');
-                        document.getElementById("purchase-form").reset(); // Reseta o formulário
-                    } else {
-                        throw new Error('Erro no processamento dos dados');
-                    }
-                })
-                .catch((error) => {
-                    console.error('Error:', error);
-                    alert('Erro ao enviar o formulário. Tente novamente.');
-                });
-            }
+            fetch("https://script.google.com/macros/s/AKfycbzMzWOGSbfinMz_-_863yJfrvmiLyXuclXviGzQXl8yYnUK1C-WRsapcKqUFYEFddD6/exec", {
+                method: "POST",
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === 'success') {
+                    alert('Formulário enviado com sucesso!');
+                    document.getElementById("purchase-form").reset();  // Limpa os campos do formulário
+                } else {
+                    alert('Erro: ' + data.message);
+                }
+            })
+            .catch((error) => {
+                console.error('Erro:', error);
+                alert('Erro ao enviar o formulário. Verifique os dados e tente novamente.');
+            });
         }
 
         document.addEventListener("DOMContentLoaded", function() {
-            // Verifica se o usuário está logado
-            if (!sessionStorage.getItem("loggedIn")) {
-                window.location.href = "login.html"; // Redireciona para o login se não estiver logado
-            }
-
             document.getElementById("purchase-form").addEventListener("submit", submitForm);
-            document.getElementById("logout").addEventListener("click", function() {
-                sessionStorage.clear();
-                window.location.href = "login.html";
-            });
         });
     </script>
 </head>
@@ -115,7 +97,6 @@
                     </div>
                     <button type="submit" class="btn btn-success btn-block">Enviar</button>
                 </form>
-                <button id="logout" class="btn btn-danger btn-block mt-3">Sair</button>
             </div>
         </div>
     </div>
