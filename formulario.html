@@ -5,52 +5,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Formulário - Necessidades de Compra</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="styles.css">
-    <script src="https://apis.google.com/js/api.js"></script>
     <script>
-        const SHEET_ID = '1ai9Dmp4j_nDhYzdXT7OArLc6vOWCS6332nT77MIifto'; // ID da sua planilha
-        const SHEET_NAME = 'PTA'; // Nome da aba na planilha
-        const API_KEY = '114GMEx9WUkl_GC0sGZwCFSaTkJfmHgm2Am0wtD618Fz65Y_ei2nWthNI'; // Sua chave da API
+        function submitForm(event) {
+            event.preventDefault(); // Impede o envio padrão do formulário
 
-        function submitForm(data) {
-            const params = {
-                spreadsheetId: SHEET_ID,
-                range: `${SHEET_NAME}!A2:J`, // Ajuste conforme necessário
-                valueInputOption: 'RAW',
-                insertDataOption: 'INSERT_ROWS',
-                key: API_KEY
-            };
+            const formData = new FormData(document.getElementById("purchase-form"));
 
-            const body = {
-                values: [data] // Os dados do formulário
-            };
-
-            const request = gapi.client.sheets.spreadsheets.values.append(params, body);
-            request.then(
-                (response) => {
-                    console.log('Dados enviados com sucesso:', response);
-                    alert('Formulário enviado com sucesso!');
-                },
-                (error) => {
-                    console.error('Erro ao enviar dados:', error);
-                    alert('Erro ao enviar formulário.');
-                }
-            );
-        }
-
-        function initClient() {
-            gapi.client
-                .init({
-                    apiKey: API_KEY,
-                    discoveryDocs: ['https://sheets.googleapis.com/$discovery/rest?version=v4']
-                })
-                .then(() => {
-                    // API está pronta
-                });
-        }
-
-        function loadGapiClient() {
-            gapi.load('client', initClient);
+            fetch("https://script.google.com/macros/s/AKfycbzMzWOGSbfinMz_-_863yJfrvmiLyXuclXviGzQXl8yYnUK1C-WRsapcKqUFYEFddD6/exec", {
+                method: "POST",
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Success:', data);
+                alert('Formulário enviado com sucesso!');
+                document.getElementById("purchase-form").reset(); // Reseta o formulário
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+                alert('Erro ao enviar o formulário. Tente novamente.');
+            });
         }
 
         document.addEventListener("DOMContentLoaded", function() {
@@ -59,30 +33,7 @@
                 window.location.href = "login.html"; // Redireciona para o login se não estiver logado
             }
 
-            document.getElementById("purchase-form").addEventListener("submit", function(event) {
-                event.preventDefault(); // Impede o envio padrão do formulário
-                loadGapiClient(); // Carrega a API
-
-                // Coleta os dados do formulário
-                const data = [
-                    document.getElementById("prioridade").value,
-                    document.getElementById("item").value,
-                    document.getElementById("descricao").value,
-                    document.getElementById("quantidade").value,
-                    document.getElementById("valor").value,
-                    document.getElementById("natureza").value,
-                    document.getElementById("secao_centralizador").value,
-                    document.getElementById("email_centralizador").value,
-                    document.getElementById("secao_cliente").value,
-                    document.getElementById("email_cliente").value,
-                    document.getElementById("justificativa").value,
-                    document.getElementById("status").value,
-                ];
-
-                // Envia os dados para a planilha
-                submitForm(data);
-            });
-
+            document.getElementById("purchase-form").addEventListener("submit", submitForm);
             document.getElementById("logout").addEventListener("click", function() {
                 sessionStorage.clear();
                 window.location.href = "login.html";
@@ -131,7 +82,7 @@
                         <input type="text" class="form-control" id="secao_centralizador" name="secao_centralizador">
                     </div>
                     <div class="form-group">
-                        <label for="email_centralizador">E-mail ZIMBRA do Centralizador</label>
+                        <label for="email_centralizador">E-mail do Centralizador</label>
                         <input type="email" class="form-control" id="email_centralizador" name="email_centralizador">
                     </div>
                     <div class="form-group">
@@ -139,7 +90,7 @@
                         <input type="text" class="form-control" id="secao_cliente" name="secao_cliente">
                     </div>
                     <div class="form-group">
-                        <label for="email_cliente">E-mail ZIMBRA do Cliente (quando houver)</label>
+                        <label for="email_cliente">E-mail do Cliente (quando houver)</label>
                         <input type="email" class="form-control" id="email_cliente" name="email_cliente">
                     </div>
                     <div class="form-group">
